@@ -93,7 +93,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "The Times 17/July/2019 Bitcoin falls after senators call Facebook delusional over libra";
+    const char* pszTimestamp = "The Times 10/April/2020 We Can Change The World";
     const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -233,7 +233,7 @@ public:
 
         // nTime: date -d '2019-08-16 00:00:00 KST' +%s = 1565881200
         // genesisReward: pow(2,32) / COIN = 42.94967296 (was 50)
-        genesis = CreateGenesisBlock(1565881200, 247, 0x1f3fffff, 1, 42.94967296 * COIN);
+        genesis = CreateGenesisBlock(1586433836, 247, 0x1f3fffff, 1, 42.94967296 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
         // DEBUG - SUGAR
@@ -243,25 +243,25 @@ public:
         // printf("genesis.hashMerkleRoot.MAIN %s\n",genesis.hashMerkleRoot.ToString().c_str());
         // printf("***\n");
 
-        assert(genesis.GetPoWHash() == uint256S("0031205acedcc69a9c18f79b84790179d68fb90588bedee6587ff701bdde04eb")); // genesis
-        assert(consensus.hashGenesisBlock == uint256S("7d5eaec2dbb75f99feadfa524c78b7cabc1d8c8204f79d4f3a83381b811b0adc")); // genesis
-        assert(genesis.hashMerkleRoot == uint256S("7677ce2a579cb0411d1c9e6b1e9072b8f537f1e59cb387dacac2daac56e150b0"));
+        assert(genesis.GetPoWHash() == uint256S("719cd8bf7fbb275e9bb4ba4e8e46ff05fd6762640206bafba29fe434f2699011")); // genesis
+        assert(consensus.hashGenesisBlock == uint256S("e3f60005c5750aff68f0f173d30d4302adff1a53980ba1ab45eca99d8c8a2807")); // genesis
+        assert(genesis.hashMerkleRoot == uint256S("e116aad0c1e1e22474e9ffeec3ae2562ff19ea6774e2e098f99789ab083268c8"));
 
         // Note that of those which support the service bits prefix, most only support a subset of
         // possible options.
         // This is fine at runtime as we'll fall back to using them as a oneshot if they dont support the
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
-        vSeeds.emplace_back("1seed.sugarchain.info"); // cryptozeny
-        vSeeds.emplace_back("2seed.sugarchain.info"); // cryptozeny
+        vSeeds.emplace_back("1seed.rtidchain.com"); 
+        vSeeds.emplace_back("2seed.rtidchain.com"); 
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,63);  // legacy: starting with S (upper)
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,60);  // legacy: starting with S (upper)
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,125); // p2sh-segwit: starting with s (lower)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
 
-        bech32_hrp = "sugar";   // bech32: starting with sugar1q
+        bech32_hrp = "rtid";   // bech32: starting with rtid1q
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
@@ -271,22 +271,16 @@ public:
 
         checkpointData = {
             {
-                {1, uint256S("ce8a0df339f2edceb99c5325c95b2b0ae752e29de1193f6113549f0e1cae7c91")},
-                {510, uint256S("f6f565e58812f89d8ea2aca296b9934ea82918f5bd443312af90b0be1465dbd1")},
-                {511, uint256S("ef160a17b4ecc855d00dd6ce051df72f1e690d91811b74c50751ada2e14c5f1a")},
-                {512, uint256S("094afbe86930e4950c601fde563cd2c7b9d050c1b567ad6fe48ae3b15a705ebb")},
-                {900000, uint256S("8a566a463925cf028cb427edb6d4d18a9c1213bf472d9032369c4e45449eb71c")},
-                {2601511, uint256S("e30af0fcf522354f43c3ab2cfb4805d175b1264608b6124eab0b635bdea2589d")}, // 2601511=2601001+510
-                // TODO.SUGAR.UPDATE
+                {0, uint256S("e116aad0c1e1e22474e9ffeec3ae2562ff19ea6774e2e098f99789ab083268c8")},
             }
         };
 
         // TODO.SUGAR.UPDATE
         chainTxData = ChainTxData{
             // Data from RPC: getchaintxstats 4096 e30af0fcf522354f43c3ab2cfb4805d175b1264608b6124eab0b635bdea2589d (2601511)
-            /* nTime    */ 1579620817,
-            /* nTxCount */ 2788446,
-            /* dTxRate  */ 0.2125159767967751
+            /* nTime    */ 0,
+            /* nTxCount */ 0,
+            /* dTxRate  */ 0
         };
     }
 };
@@ -404,7 +398,7 @@ public:
 
         // nTime: date -d '2019-08-16 00:00:01 UTC' +%s = 1565913601
         // genesisReward: pow(2,32) / COIN = 42.94967296 (was 50)
-        genesis = CreateGenesisBlock(1565913601, 490, 0x1f3fffff, 1, 42.94967296 * COIN);
+        genesis = CreateGenesisBlock(1586433837, 490, 0x1f3fffff, 1, 42.94967296 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
         // DEBUG - SUGAR
@@ -414,9 +408,9 @@ public:
         // printf("genesis.hashMerkleRoot.TESTNET %s\n",genesis.hashMerkleRoot.ToString().c_str());
         // printf("***\n");
 
-        assert(genesis.GetPoWHash() == uint256S("0032f49a73e00fc182e08d5ede75c1418c7833092d663e43a5463c1dbd096f28")); // genesis
-        assert(consensus.hashGenesisBlock == uint256S("e0e0e42e493ba7b15f7b0fe1a7e66f73b7fd8b3e6e6a7b0e821a6b95040d3826")); // genesis
-        assert(genesis.hashMerkleRoot == uint256S("7677ce2a579cb0411d1c9e6b1e9072b8f537f1e59cb387dacac2daac56e150b0"));
+        assert(genesis.GetPoWHash() == uint256S("17af11f5eb616333c982827650d63751b31d20705a8cd981a2242151d10d3d8d")); // genesis
+        assert(consensus.hashGenesisBlock == uint256S("7574934f4ac3d04a0ea070951c87aacee1ffb9cbd48fb32dba6e1a75bb7c3457")); // genesis
+        assert(genesis.hashMerkleRoot == uint256S("e116aad0c1e1e22474e9ffeec3ae2562ff19ea6774e2e098f99789ab083268c8"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -429,7 +423,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        bech32_hrp = "tugar";     // bech32: starting with tugar1q
+        bech32_hrp = "trid";     // bech32: starting with trid1q
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
 
@@ -440,20 +434,16 @@ public:
 
         checkpointData = {
             {
-                {1, uint256S("0741357f5ee729dffdebdc78f0897f4c244788effebb2cda22c5d5947bebd923")},
-                {510, uint256S("9e355f520668f48212641bf674733d24e56c6b2f05ac60ba6fa860163feef8d4")},
-                {511, uint256S("9418cef01af69fc2491afcb56c640df9d78e0d0768bf9e2748c1978d2ffb97ed")},
-                {512, uint256S("c8663700fe1020185d26f1f06571dd51ed2f9c331436b83aa08dd21352f7ffea")},
-                {780811, uint256S("bd83debccee1bef17340539beff64ad3feab03c25e5d91969cf5418b8e2fe5a7")}, // 780811=780301+510
+                {0, uint256S("7574934f4ac3d04a0ea070951c87aacee1ffb9cbd48fb32dba6e1a75bb7c3457")},
             }
         };
 
         // TODO.SUGAR.UPDATE
         chainTxData = ChainTxData{
             // Data from RPC: getchaintxstats 4096 bd83debccee1bef17340539beff64ad3feab03c25e5d91969cf5418b8e2fe5a7 (780811)
-            /* nTime    */ 1580549062,
-            /* nTxCount */ 801819,
-            /* dTxRate  */ 0.1563717517116163
+            /* nTime    */ 0,
+            /* nTxCount */ 0,
+            /* dTxRate  */ 0
         };
 
     }
@@ -559,7 +549,7 @@ public:
 
         // nTime: date -d '2019-08-16 00:00:02 UTC' +%s = 1565913602
         // genesisReward: pow(2,32) / COIN = 42.94967296 (was 50)
-        genesis = CreateGenesisBlock(1565913602, 9, 0x200f0f0f, 1, 42.94967296 * COIN);
+        genesis = CreateGenesisBlock(1586433838, 9, 0x200f0f0f, 1, 42.94967296 * COIN);
 
         consensus.hashGenesisBlock = genesis.GetHash();
 
@@ -570,9 +560,9 @@ public:
         // printf("genesis.hashMerkleRoot.REGTEST %s\n",genesis.hashMerkleRoot.ToString().c_str());
         // printf("*** END - DEBUG\n");
 
-        assert(genesis.GetPoWHash() == uint256S("0d144c097fa9c4cf7482fde74f95da8045b516490741af0ee9b1ac1f1dd6c914")); // genesis
-        assert(consensus.hashGenesisBlock == uint256S("d567a9c891c7a47e6dd03f8006cb65b0d6406b5dc7b2c86d7a904815c394e1f1")); // genesis
-        assert(genesis.hashMerkleRoot == uint256S("7677ce2a579cb0411d1c9e6b1e9072b8f537f1e59cb387dacac2daac56e150b0"));
+        assert(genesis.GetPoWHash() == uint256S("a562af5b2e47ccde7433ca51dc942781af37f383afe8c0a77dec6af9a21f6a28")); // genesis
+        assert(consensus.hashGenesisBlock == uint256S("d3831a8270543ca291016bff36502c63ac63783de9222f9979c98654872f9193")); // genesis
+        assert(genesis.hashMerkleRoot == uint256S("e116aad0c1e1e22474e9ffeec3ae2562ff19ea6774e2e098f99789ab083268c8"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
@@ -583,7 +573,7 @@ public:
 
         checkpointData = {
             {
-                {0, uint256S("d567a9c891c7a47e6dd03f8006cb65b0d6406b5dc7b2c86d7a904815c394e1f1")}, // genesis
+                {0, uint256S("d3831a8270543ca291016bff36502c63ac63783de9222f9979c98654872f9193")}, // genesis
             }
         };
 
