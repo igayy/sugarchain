@@ -224,10 +224,10 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0x9f;
-        pchMessageStart[1] = 0xeb;
-        pchMessageStart[2] = 0x4b;
-        pchMessageStart[3] = 0x9d;
+        pchMessageStart[0] = 0xa1;
+        pchMessageStart[1] = 0x98;
+        pchMessageStart[2] = 0xd9;
+        pchMessageStart[3] = 0xdb;
         nDefaultPort = 34230;
         nPruneAfterHeight = 100000;
 
@@ -255,8 +255,8 @@ public:
         vSeeds.emplace_back("1seed.rtidchain.com"); 
         vSeeds.emplace_back("2seed.rtidchain.com"); 
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,60);  // legacy: starting with S (upper)
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,125); // p2sh-segwit: starting with s (lower)
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,60);  // legacy: starting with R (upper)
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,122); // p2sh-segwit: starting with r (lower)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
@@ -389,10 +389,10 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("e87ec8451768ddadc3364b48efdc8f47b79e7723eb69c75ae3e7083bf48985b1"); // getblockhash 780301 "hash" // TODO.SUGAR.UPDATE
 
-        pchMessageStart[0] = 0xb0;
-        pchMessageStart[1] = 0x11;
-        pchMessageStart[2] = 0x90;
-        pchMessageStart[3] = 0x70;
+        pchMessageStart[0] = 0x84;
+        pchMessageStart[1] = 0xda;
+        pchMessageStart[2] = 0xb5;
+        pchMessageStart[3] = 0xb4;
         nDefaultPort = 44230;
         nPruneAfterHeight = 1000;
 
@@ -540,10 +540,10 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("d567a9c891c7a47e6dd03f8006cb65b0d6406b5dc7b2c86d7a904815c394e1f1"); // genesis
 
-        pchMessageStart[0] = 0xaf;
-        pchMessageStart[1] = 0xfb;
-        pchMessageStart[2] = 0x5b;
-        pchMessageStart[3] = 0xad;
+        pchMessageStart[0] = 0xa6;
+        pchMessageStart[1] = 0xef;
+        pchMessageStart[2] = 0xb7;
+        pchMessageStart[3] = 0x98;
         nDefaultPort = 45340;
         nPruneAfterHeight = 1000;
 
@@ -589,7 +589,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
-        bech32_hrp = "rugar";    // bech32: starting with rugar1q
+        bech32_hrp = "rrid";    // bech32: starting with rrid1q
     }
 };
 
